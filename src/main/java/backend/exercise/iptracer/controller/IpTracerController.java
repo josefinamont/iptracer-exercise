@@ -1,7 +1,7 @@
 package backend.exercise.iptracer.controller;
 
 import backend.exercise.iptracer.dto.IpDataDto;
-import backend.exercise.iptracer.service.geolocalization.IpGeolocalizationResponse;
+import backend.exercise.iptracer.service.iptracer.IpTracerResponse;
 import backend.exercise.iptracer.service.iptracer.IpTracerService;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +16,7 @@ public class IpTracerController {
 
     @RequestMapping(value = "/trace", method = RequestMethod.POST)
     @ResponseBody
-    public IpGeolocalizationResponse trace(@RequestBody IpDataDto ipData) {
+    public IpTracerResponse trace(@RequestBody IpDataDto ipData) {
         return ipTracerService.trace(ipData.getId());
     }
 

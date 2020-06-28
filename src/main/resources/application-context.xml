@@ -15,6 +15,11 @@
         <constructor-arg ref="customJsonMapper" />
     </bean>
 
+    <bean id="countryInformationService" class="backend.exercise.iptracer.service.country.CountryInformationService" >
+        <constructor-arg ref="httpConnector" />
+        <constructor-arg ref="customJsonMapper" />
+    </bean>
+
     <bean id="ipTracerController" class="backend.exercise.iptracer.controller.IpTracerController">
         <constructor-arg ref="ipTracerService" />
     </bean>
