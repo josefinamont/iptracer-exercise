@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="httpConnector" class="backend.exercise.iptracer.common.HttpConnector" />
+    <bean id="customJsonMapper" class="backend.exercise.iptracer.common.CustomJsonMapper" />
+    <bean id="ipTracerService" class="backend.exercise.iptracer.service.iptracer.IpTracerService" />
+
+    <bean id="ipGeolocalizationService" class="backend.exercise.iptracer.service.geolocalization.IpGeolocalizationService" >
+        <constructor-arg ref="httpConnector" />
+        <constructor-arg ref="customJsonMapper" />
+    </bean>
+
+    <bean id="ipTracerController" class="backend.exercise.iptracer.controller.IpTracerController">
+        <constructor-arg ref="ipTracerService" />
+    </bean>
+</beans>
