@@ -13,6 +13,7 @@ public class CustomMapper {
     public CustomMapper() {
         this.mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        mapper.configure(DeserializationFeature.FAIL_ON_NULL_CREATOR_PROPERTIES, true);
     }
 
     public <T> T map(String json, TypeReference<T> typeReference) {

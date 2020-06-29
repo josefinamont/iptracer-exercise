@@ -22,8 +22,4 @@ public class Language {
     public void setCode(String code) {
         this.code = code;
     }
-
-    public String buildLanguage() {
-        return nativeName + "(" + code + ")";
-    }
 }

@@ -21,8 +21,8 @@ public class RestCountriesResponse {
         this.languages = languages;
     }
 
-    public String getCurrency() {
-        return currencies.stream().map(Currency::getCode).findFirst().get();
+    public List<Currency> getCurrencies() {
+        return currencies;
     }
 
     public void setCurrencies(List<Currency> currencies) {

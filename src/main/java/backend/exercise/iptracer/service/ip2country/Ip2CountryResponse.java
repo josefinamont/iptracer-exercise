@@ -1,6 +1,7 @@
 package backend.exercise.iptracer.service.ip2country;
 
 public class Ip2CountryResponse {
+
     private String countryCode;
     private String countryName;
 

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DistanceHelper {
     private final double latBuenosAires = -34.637145;
-    private final double longBuenosAires = -58.406460;
+    private final double lonBuenosAires = -58.406460;
 
     public double distance(double lat, double lon) {
         // The math module contains a function
@@ -15,7 +15,7 @@ public class DistanceHelper {
         lat = Math.toRadians(lat);
 
         // Haversine formula
-        double dlon = longBuenosAires - lon;
+        double dlon = lonBuenosAires - lon;
         double dlat = latBuenosAires - lat;
         double a = Math.pow(Math.sin(dlat / 2), 2)
                 + Math.cos(lat) * Math.cos(latBuenosAires)
