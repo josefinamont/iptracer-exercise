@@ -33,9 +33,8 @@ public class IpTracerResponse {
         return datetime;
     }
 
-    public void setDatetime(LocalDateTime datetime) {
-        DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-        this.datetime = datetime.toString(fmt);
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
     }
 
     public String getCountry() {
