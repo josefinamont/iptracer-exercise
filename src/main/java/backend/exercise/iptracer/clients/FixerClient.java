@@ -17,7 +17,7 @@ public class FixerClient extends HttpClient {
     @Value("${fixer.symbols}")
     private String symbols;
 
-    public FixerResponse get() {
+    public FixerResponse getResponse() {
         String url = baseUrl + path + "?access_key=" + accessKey + "&symbols=" + symbols;
         String response = super.get(url);
         return super.customMapper.map(response, new TypeReference<FixerResponse>() {});
