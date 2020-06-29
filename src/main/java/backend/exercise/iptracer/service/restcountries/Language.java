@@ -1,4 +1,4 @@
-package backend.exercise.iptracer.service.country;
+package backend.exercise.iptracer.service.restcountries;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,23 +1,18 @@
 package backend.exercise.iptracer.service.iptracer;
 
 import backend.exercise.iptracer.service.DistanceHelper;
-import backend.exercise.iptracer.service.country.CountryInformationResponse;
-import backend.exercise.iptracer.service.country.CountryInformationService;
-import backend.exercise.iptracer.service.currency.CurrencyResponse;
-import backend.exercise.iptracer.service.currency.CurrencyService;
-import backend.exercise.iptracer.service.geolocalization.IpGeolocalizationResponse;
-import backend.exercise.iptracer.service.geolocalization.IpGeolocalizationService;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
+import backend.exercise.iptracer.service.restcountries.RestCountriesResponse;
+import backend.exercise.iptracer.service.restcountries.RestCountriesService;
+import backend.exercise.iptracer.service.currency.FixerResponse;
+import backend.exercise.iptracer.service.currency.FixerService;
+import backend.exercise.iptracer.service.ip2country.Ip2CountryResponse;
+import backend.exercise.iptracer.service.ip2country.Ip2CountryService;
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.TimeZone;
 import java.util.stream.Collectors;
 
 import static org.joda.time.DateTimeZone.UTC;
@@ -25,31 +20,31 @@ import static org.joda.time.DateTimeZone.UTC;
 @Service
 public class IpTracerService {
     @Autowired
-    private IpGeolocalizationService geolocalizationService;
+    private Ip2CountryService ip2CountryService;
     @Autowired
-    private CountryInformationService countryInformationService;
+    private RestCountriesService restCountriesService;
     @Autowired
     private DistanceHelper distanceHelper;
     @Autowired
-    private CurrencyService currencyService;
+    private FixerService fixerService;
 
     public IpTracerResponse trace(String ip) {
-        IpGeolocalizationResponse geolocalizationResponse = geolocalizationService.getIpGeolocalization(ip);
-        CountryInformationResponse countryInformationResponse = countryInformationService.getCountryInformation(
+        Ip2CountryResponse geolocalizationResponse = ip2CountryService.getIpGeolocalization(ip);
+        RestCountriesResponse restCountriesResponse = restCountriesService.getCountryInformation(
                 geolocalizationResponse.getCountryCode());
-        CurrencyResponse currencyResponse = currencyService.getCurrencyRate();
+        FixerResponse fixerResponse = fixerService.getCurrencyRate();
 
         IpTracerResponse response = new IpTracerResponse();
         response.setIp(ip);
         response.setIsoCode(geolocalizationResponse.getCountryCode());
         response.setDatetime(LocalDateTime.now());
         response.setCountry(geolocalizationResponse.getCountryName());
-        response.setLanguages(countryInformationResponse.getLanguages());
-        response.setCurrency(countryInformationResponse.getCurrency() + " (1 " + countryInformationResponse.getCurrency()
-                + " = " + currencyResponse.getRate().toString() + " USD)");
-        response.setTimes(countryInformationResponse.getTimezones().stream().map(IpTracerService::getUTCdatetimeAsString).collect(Collectors.toList()));
-        response.setEstimatedDistance(distanceHelper.distance(countryInformationResponse.getLatlng().get(0),
-                countryInformationResponse.getLatlng().get(1)) + " kms");
+        response.setLanguages(restCountriesResponse.getLanguages());
+        response.setCurrency(restCountriesResponse.getCurrency() + " (1 " + restCountriesResponse.getCurrency()
+                + " = " + fixerResponse.getRate().toString() + " USD)");
+        response.setTimes(restCountriesResponse.getTimezones().stream().map(IpTracerService::getUTCdatetimeAsString).collect(Collectors.toList()));
+        response.setEstimatedDistance(distanceHelper.distance(restCountriesResponse.getLatlng().get(0),
+                restCountriesResponse.getLatlng().get(1)) + " kms");
         return response;
     }
 

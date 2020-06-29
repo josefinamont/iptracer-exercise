@@ -12,14 +12,14 @@
 
     <bean id="distanceHelper" class="backend.exercise.iptracer.service.DistanceHelper" />
 
-    <bean id="currencyService" class="backend.exercise.iptracer.service.currency.CurrencyService" />
+    <bean id="fixerService" class="backend.exercise.iptracer.service.currency.FixerService" />
 
-    <bean id="ipGeolocalizationService" class="backend.exercise.iptracer.service.geolocalization.IpGeolocalizationService" >
+    <bean id="ip2CountryService" class="backend.exercise.iptracer.service.ip2country.Ip2CountryService" >
         <constructor-arg ref="httpConnector" />
         <constructor-arg ref="customJsonMapper" />
     </bean>
 
-    <bean id="countryInformationService" class="backend.exercise.iptracer.service.country.CountryInformationService" >
+    <bean id="restCountriesService" class="backend.exercise.iptracer.service.restcountries.RestCountriesService" >
         <constructor-arg ref="httpConnector" />
         <constructor-arg ref="customJsonMapper" />
     </bean>

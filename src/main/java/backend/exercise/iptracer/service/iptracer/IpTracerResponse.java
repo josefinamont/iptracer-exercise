@@ -1,6 +1,6 @@
 package backend.exercise.iptracer.service.iptracer;
 
-import backend.exercise.iptracer.service.country.Language;
+import backend.exercise.iptracer.service.restcountries.Language;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;

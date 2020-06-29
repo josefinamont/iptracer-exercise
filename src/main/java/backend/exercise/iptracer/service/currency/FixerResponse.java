@@ -2,7 +2,7 @@ package backend.exercise.iptracer.service.currency;
 
 import java.util.Map;
 
-public class CurrencyResponse {
+public class FixerResponse {
     private Map<String, Double> rates;
 
     public Map<String, Double> getRates() {

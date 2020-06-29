@@ -1,6 +1,6 @@
-package backend.exercise.iptracer.service.geolocalization;
+package backend.exercise.iptracer.service.ip2country;
 
-public class IpGeolocalizationResponse {
+public class Ip2CountryResponse {
     private String countryCode;
     private String countryName;
 

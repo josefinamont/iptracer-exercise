@@ -1,9 +1,9 @@
-package backend.exercise.iptracer.service.country;
+package backend.exercise.iptracer.service.restcountries;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-public class CountryInformationResponse {
+public class RestCountriesResponse {
     @JsonProperty
     private List<Language> languages;
     @JsonProperty
