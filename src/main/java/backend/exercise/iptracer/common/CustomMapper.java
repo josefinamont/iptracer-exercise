@@ -4,23 +4,22 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 
 @Component
-public class CustomJsonMapper {
+public class CustomMapper {
     private ObjectMapper mapper;
 
-    public CustomJsonMapper() {
+    public CustomMapper() {
         this.mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
-    public <T> T fromJson(String json, TypeReference<T> typeReference) {
+    public <T> T parse(String json, TypeReference<T> typeReference) {
         try {
             return this.mapper.readValue(json, typeReference);
         } catch (IOException e) {
-            throw new RuntimeException("Error reading a json", e);
+            throw new RuntimeException("Error reading json", e);
         }
     }
 }

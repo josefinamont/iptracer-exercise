@@ -7,7 +7,7 @@
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <bean id="httpClient" class="backend.exercise.iptracer.common.HttpClient" />
-    <bean id="customJsonMapper" class="backend.exercise.iptracer.common.CustomJsonMapper" />
+    <bean id="customJsonMapper" class="backend.exercise.iptracer.common.CustomMapper" />
     <bean id="ipTracerService" class="backend.exercise.iptracer.service.iptracer.IpTracerService" />
 
     <bean id="distanceHelper" class="backend.exercise.iptracer.service.DistanceHelper" />

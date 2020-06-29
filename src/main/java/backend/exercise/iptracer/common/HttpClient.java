@@ -10,7 +10,6 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 import java.util.Optional;
 
@@ -18,7 +17,7 @@ import java.util.Optional;
 public abstract class HttpClient {
     private CloseableHttpClient httpClient = HttpClients.createDefault();
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpClient.class);
-
+// TODO mejorar el manejo de errores
     public String get(String url) {
         ResponseHandler<String> responseHandler = response -> {
             int status = response.getStatusLine().getStatusCode();
