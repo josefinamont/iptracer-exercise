@@ -15,6 +15,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 public class IpTracerService {
     @Autowired
@@ -43,15 +45,15 @@ public class IpTracerService {
     private IpTracerResponse processIp(String ip) {
         Ip2CountryResponse ip2CountryResponse = ip2CountryService.getCountry(ip);
         RestCountry restCountry = restCountriesService.getRestCountries(ip2CountryResponse.getCountryCode());
-        FixerResponse fixerResponse = fixerService.getCurrencyRate();
+        FixerResponse fixerResponse = fixerService.getCurrencyRate(restCountry.getCurrency());
 
         return new IpTracerResponse(
                 ip,
                 buildDateTime(),
-                ip2CountryResponse.getCountryCode(),
                 ip2CountryResponse.getCountryName(),
+                ip2CountryResponse.getCountryCode(),
                 restCountry.getLanguages(),
-                buildCurrency(restCountry.getCurrency(), fixerResponse.getRate()),
+                buildCurrency(restCountry.getCurrency(), fixerResponse.getRates()),
                 restCountry.getTimes(),
                 buildDistance(restCountry.getLat(), restCountry.getLon())
         );
@@ -66,8 +68,9 @@ public class IpTracerService {
         return LocalDateTime.now().toString(formatter);
     }
 
-    private String buildCurrency(String currency, double rate) {
-        return currency + " (1 " + currency + " = " + rate + " USD)";
+    private String buildCurrency(String currency, Map<String,Double> rates) {
+        double sarasin = rates.get("USD") / rates.get(currency);
+        return currency + " (1 " + currency + " = " + sarasin + " USD)";
     }
 
     private String buildDistance(double ipLat, double ipLong) {

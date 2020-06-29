@@ -11,7 +11,7 @@ public class FixerService {
         this.fixerClient = fixerClient;
     }
 
-    public FixerResponse getCurrencyRate() {
-        return fixerClient.getResponse();
+    public FixerResponse getCurrencyRate(String currencyCode) {
+        return fixerClient.getResponse(currencyCode);
     }
 }

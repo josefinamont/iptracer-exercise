@@ -33,4 +33,36 @@ public class IpTracerResponse {
         this.times = times;
         this.estimatedDistance = estimatedDistance;
     }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public String getDatetime() {
+        return datetime;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getIsoCode() {
+        return isoCode;
+    }
+
+    public List<String> getLanguages() {
+        return languages;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public List<String> getTimes() {
+        return times;
+    }
+
+    public String getEstimatedDistance() {
+        return estimatedDistance;
+    }
 }
