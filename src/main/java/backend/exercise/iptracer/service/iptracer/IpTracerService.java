@@ -3,6 +3,8 @@ package backend.exercise.iptracer.service.iptracer;
 import backend.exercise.iptracer.service.DistanceHelper;
 import backend.exercise.iptracer.service.country.CountryInformationResponse;
 import backend.exercise.iptracer.service.country.CountryInformationService;
+import backend.exercise.iptracer.service.currency.CurrencyResponse;
+import backend.exercise.iptracer.service.currency.CurrencyService;
 import backend.exercise.iptracer.service.geolocalization.IpGeolocalizationResponse;
 import backend.exercise.iptracer.service.geolocalization.IpGeolocalizationService;
 import org.joda.time.LocalDateTime;
@@ -17,11 +19,14 @@ public class IpTracerService {
     private CountryInformationService countryInformationService;
     @Autowired
     private DistanceHelper distanceHelper;
+    @Autowired
+    private CurrencyService currencyService;
 
     public IpTracerResponse trace(String ip) {
         IpGeolocalizationResponse geolocalizationResponse = geolocalizationService.getIpGeolocalization(ip);
         CountryInformationResponse countryInformationResponse = countryInformationService.getCountryInformation(
                 geolocalizationResponse.getCountryCode());
+        CurrencyResponse currencyResponse = currencyService.getCurrencyRate();
 
         IpTracerResponse response = new IpTracerResponse();
         response.setIp(ip);
@@ -29,7 +34,8 @@ public class IpTracerService {
         response.setDatetime(LocalDateTime.now());
         response.setCountry(geolocalizationResponse.getCountryName());
         response.setLanguages(countryInformationResponse.getLanguages());
-        response.setCurrency(countryInformationResponse.getCurrency());
+        response.setCurrency(countryInformationResponse.getCurrency() + " (1 " + countryInformationResponse.getCurrency()
+                + " = " + currencyResponse.getRate().toString() + " USD)");
         response.setTimes(countryInformationResponse.getTimezones());
         response.setEstimatedDistance(distanceHelper.distance(countryInformationResponse.getLatlng().get(0),
                 countryInformationResponse.getLatlng().get(1)) + " kms");

@@ -12,6 +12,8 @@
 
     <bean id="distanceHelper" class="backend.exercise.iptracer.service.DistanceHelper" />
 
+    <bean id="currencyService" class="backend.exercise.iptracer.service.currency.CurrencyService" />
+
     <bean id="ipGeolocalizationService" class="backend.exercise.iptracer.service.geolocalization.IpGeolocalizationService" >
         <constructor-arg ref="httpConnector" />
         <constructor-arg ref="customJsonMapper" />

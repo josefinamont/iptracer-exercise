@@ -13,6 +13,7 @@ public class IpTracerResponse {
     private String ip;
     private String datetime;
     private String country;
+    @JsonProperty("iso_code")
     private String isoCode;
     private List<Language> languages;
     private String currency;
