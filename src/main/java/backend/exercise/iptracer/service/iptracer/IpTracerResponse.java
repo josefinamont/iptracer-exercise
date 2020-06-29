@@ -1,6 +1,5 @@
 package backend.exercise.iptracer.service.iptracer;
 
-import backend.exercise.iptracer.service.country.Currency;
 import backend.exercise.iptracer.service.country.Language;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.LocalDateTime;
@@ -16,8 +15,8 @@ public class IpTracerResponse {
     private String country;
     private String isoCode;
     private List<Language> languages;
-    private List<Currency> currencies;
-    private List<String> timezones;
+    private String currency;
+    private List<String> times;
     @JsonProperty("estimated_distance")
     private String estimatedDistance;
 
@@ -63,19 +62,19 @@ public class IpTracerResponse {
     }
 
     public String getCurrency() {
-        return this.currencies.stream().findFirst().get().getCode();
+        return this.currency;
     }
 
-    public void setCurrencies(List<Currency> currencies) {
-        this.currencies = currencies;
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
-    public List<String> getTimezones() {
-        return timezones;
+    public List<String> getTimes() {
+        return times;
     }
 
-    public void setTimezones(List<String> timezones) {
-        this.timezones = timezones;
+    public void setTimes(List<String> times) {
+        this.times = times;
     }
 
     public String getEstimatedDistance() {

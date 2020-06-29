@@ -10,6 +10,8 @@
     <bean id="customJsonMapper" class="backend.exercise.iptracer.common.CustomJsonMapper" />
     <bean id="ipTracerService" class="backend.exercise.iptracer.service.iptracer.IpTracerService" />
 
+    <bean id="distanceHelper" class="backend.exercise.iptracer.service.DistanceHelper" />
+
     <bean id="ipGeolocalizationService" class="backend.exercise.iptracer.service.geolocalization.IpGeolocalizationService" >
         <constructor-arg ref="httpConnector" />
         <constructor-arg ref="customJsonMapper" />

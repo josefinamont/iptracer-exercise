@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class IpGeolocalizationService {
-
     private String url = "https://api.ip2country.info/ip?";
     private final HttpConnector httpConnector;
     private final CustomJsonMapper customJsonMapper;
