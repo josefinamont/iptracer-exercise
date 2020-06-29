@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="httpClient" class="backend.exercise.iptracer.common.HttpClient" />
+    <bean id="customJsonMapper" class="backend.exercise.iptracer.common.CustomMapper" />
+    <bean id="ipTracerService" class="backend.exercise.iptracer.service.iptracer.IpTracerService" />
+
+    <bean id="distanceHelper" class="backend.exercise.iptracer.service.DistanceHelper" />
+
+    <bean id="fixerService" class="backend.exercise.iptracer.service.fixer.FixerService" >
+        <constructor-arg ref="httpClient" />
+        <constructor-arg ref="customJsonMapper" />
+    </bean>
+
+    <bean id="ip2CountryService" class="backend.exercise.iptracer.service.ip2country.Ip2CountryService" >
+        <constructor-arg ref="httpClient" />
+        <constructor-arg ref="customJsonMapper" />
+    </bean>
+
+    <bean id="restCountriesService" class="backend.exercise.iptracer.service.restcountries.RestCountriesService" >
+        <constructor-arg ref="httpClient" />
+        <constructor-arg ref="customJsonMapper" />
+    </bean>
+
+    <bean id="ipTracerController" class="backend.exercise.iptracer.controller.IpTracerController">
+        <constructor-arg ref="ipTracerService" />
+    </bean>
+</beans>
