@@ -1,6 +1,6 @@
 package backend.exercise.iptracer.service.iptracer;
 
-import backend.exercise.iptracer.model.exceptions.InvalidIpException;
+import backend.exercise.iptracer.model.exceptions.InvalidIpFormatException;
 import backend.exercise.iptracer.service.DistanceHelper;
 import backend.exercise.iptracer.service.fixer.FixerResponse;
 import backend.exercise.iptracer.service.fixer.FixerService;
@@ -36,7 +36,7 @@ public class IpTracerService {
             return processIp(ip);
         } else {
             LOGGER.info("The IP provided is not valid");
-            throw new InvalidIpException("The IP provided is not valid");
+            throw new InvalidIpFormatException("The IP provided is not valid");
         }
     }
 
