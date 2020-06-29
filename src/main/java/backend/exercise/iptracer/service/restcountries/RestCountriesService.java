@@ -17,7 +17,7 @@ public class RestCountriesService {
     }
 
     public RestCountriesResponse getCountryInformation(String countryCode) {
-        String response = httpConnector.get(url, countryCode);
+        String response = httpConnector.get(url + countryCode);
 
         return customJsonMapper.fromJson(response, new TypeReference<RestCountriesResponse>() {});
     }

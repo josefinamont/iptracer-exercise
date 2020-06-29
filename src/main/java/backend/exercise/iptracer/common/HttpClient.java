@@ -15,12 +15,11 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Component
-public class HttpConnector {
+public abstract class HttpClient {
     private CloseableHttpClient httpClient = HttpClients.createDefault();
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpConnector.class);
 
-    // TODO mejorar esto
-    public String get(String url) {
+    public String getCountry(String url) {
         ResponseHandler<String> responseHandler = response -> {
             int status = response.getStatusLine().getStatusCode();
             if (status >= 200 && status < 300) {

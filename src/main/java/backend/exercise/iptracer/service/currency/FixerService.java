@@ -17,7 +17,7 @@ public class FixerService {
     }
 
     public FixerResponse getCurrencyRate() {
-        String response = httpConnector.get(url, "");
+        String response = httpConnector.get(url);
 
         return customJsonMapper.fromJson(response, new TypeReference<FixerResponse>() {});
     }

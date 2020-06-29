@@ -29,7 +29,7 @@ public class IpTracerService {
     private FixerService fixerService;
 
     public IpTracerResponse trace(String ip) {
-        Ip2CountryResponse geolocalizationResponse = ip2CountryService.getIpGeolocalization(ip);
+        Ip2CountryResponse geolocalizationResponse = ip2CountryService.getCountry(ip);
         RestCountriesResponse restCountriesResponse = restCountriesService.getCountryInformation(
                 geolocalizationResponse.getCountryCode());
         FixerResponse fixerResponse = fixerService.getCurrencyRate();
