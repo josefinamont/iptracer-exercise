@@ -1,6 +1,8 @@
 package backend.exercise.iptracer.clients;
 
 import backend.exercise.iptracer.common.HttpClient;
+import backend.exercise.iptracer.service.fixer.FixerResponse;
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +17,9 @@ public class FixerClient extends HttpClient {
     @Value("${fixer.symbols}")
     private String symbols;
 
-    public String get() {
+    public FixerResponse get() {
         String url = baseUrl + path + "?access_key=" + accessKey + "&symbols=" + symbols;
-        return super.get(url);
+        String response = super.get(url);
+        return super.customMapper.map(response, new TypeReference<FixerResponse>() {});
     }
 }

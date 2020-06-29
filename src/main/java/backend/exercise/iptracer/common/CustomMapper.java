@@ -15,7 +15,7 @@ public class CustomMapper {
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
-    public <T> T parse(String json, TypeReference<T> typeReference) {
+    public <T> T map(String json, TypeReference<T> typeReference) {
         try {
             return this.mapper.readValue(json, typeReference);
         } catch (IOException e) {

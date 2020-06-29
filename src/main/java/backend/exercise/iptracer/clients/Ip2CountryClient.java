@@ -1,6 +1,8 @@
 package backend.exercise.iptracer.clients;
 
 import backend.exercise.iptracer.common.HttpClient;
+import backend.exercise.iptracer.service.ip2country.Ip2CountryResponse;
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -11,8 +13,10 @@ public class Ip2CountryClient extends HttpClient {
     @Value("${ip2country.path}")
     private String path;
 
-    public String get(String ip) {
+    public Ip2CountryResponse getResponse(String ip) {
         String url = baseUrl + path + "?" + ip;
-        return super.get(url);
+        String response = super.get(url);
+        
+        return customMapper.map(response, new TypeReference<Ip2CountryResponse>() {});
     }
 }

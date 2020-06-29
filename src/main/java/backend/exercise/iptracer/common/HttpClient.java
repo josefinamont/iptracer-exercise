@@ -15,8 +15,10 @@ import java.util.Optional;
 
 @Component
 public abstract class HttpClient {
-    private CloseableHttpClient httpClient = HttpClients.createDefault();
+    private final CloseableHttpClient httpClient = HttpClients.createDefault();
+    protected final CustomMapper customMapper = new CustomMapper();
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpClient.class);
+
 // TODO mejorar el manejo de errores
     public String get(String url) {
         ResponseHandler<String> responseHandler = response -> {
