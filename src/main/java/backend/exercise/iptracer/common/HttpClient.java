@@ -17,9 +17,9 @@ import java.util.Optional;
 @Component
 public abstract class HttpClient {
     private CloseableHttpClient httpClient = HttpClients.createDefault();
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpConnector.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpClient.class);
 
-    public String getCountry(String url) {
+    public String get(String url) {
         ResponseHandler<String> responseHandler = response -> {
             int status = response.getStatusLine().getStatusCode();
             if (status >= 200 && status < 300) {

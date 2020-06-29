@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class Ip2CountryService {
-
     private final Ip2CountryClient ip2CountryClient;
     private final CustomJsonMapper customJsonMapper;
 
@@ -17,7 +16,7 @@ public class Ip2CountryService {
     }
 
     public Ip2CountryResponse getCountry(String ip) {
-        String response = ip2CountryClient.getCountry(ip);
+        String response = ip2CountryClient.get(ip);
 
         return customJsonMapper.fromJson(response, new TypeReference<Ip2CountryResponse>() {});
     }

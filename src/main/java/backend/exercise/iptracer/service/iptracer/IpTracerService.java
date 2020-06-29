@@ -3,8 +3,8 @@ package backend.exercise.iptracer.service.iptracer;
 import backend.exercise.iptracer.service.DistanceHelper;
 import backend.exercise.iptracer.service.restcountries.RestCountriesResponse;
 import backend.exercise.iptracer.service.restcountries.RestCountriesService;
-import backend.exercise.iptracer.service.currency.FixerResponse;
-import backend.exercise.iptracer.service.currency.FixerService;
+import backend.exercise.iptracer.service.fixer.FixerResponse;
+import backend.exercise.iptracer.service.fixer.FixerService;
 import backend.exercise.iptracer.service.ip2country.Ip2CountryResponse;
 import backend.exercise.iptracer.service.ip2country.Ip2CountryService;
 import org.joda.time.LocalDateTime;
@@ -30,7 +30,7 @@ public class IpTracerService {
 
     public IpTracerResponse trace(String ip) {
         Ip2CountryResponse geolocalizationResponse = ip2CountryService.getCountry(ip);
-        RestCountriesResponse restCountriesResponse = restCountriesService.getCountryInformation(
+        RestCountriesResponse restCountriesResponse = restCountriesService.getRestCountries(
                 geolocalizationResponse.getCountryCode());
         FixerResponse fixerResponse = fixerService.getCurrencyRate();
 

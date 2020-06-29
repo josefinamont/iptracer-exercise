@@ -4,9 +4,8 @@ import backend.exercise.iptracer.common.HttpClient;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Ip2CountryClient extends HttpClient {
-
-    private String url = "https://api.ip2country.info/ip?";
+public class RestCountriesClient extends HttpClient {
+    private String url = "https://restcountries.eu/rest/v2/alpha/";
 
     public String get(String ip) {
         return super.get(url + ip);
