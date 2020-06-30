@@ -1,7 +1,7 @@
 package backend.exercise.iptracer.service.iptracer;
 
 import backend.exercise.iptracer.model.exceptions.InvalidIpFormatException;
-import backend.exercise.iptracer.service.DistanceHelper;
+import backend.exercise.iptracer.helpers.DistanceHelper;
 import backend.exercise.iptracer.service.fixer.FixerResponse;
 import backend.exercise.iptracer.service.fixer.FixerService;
 import backend.exercise.iptracer.service.ip2country.Ip2CountryResponse;

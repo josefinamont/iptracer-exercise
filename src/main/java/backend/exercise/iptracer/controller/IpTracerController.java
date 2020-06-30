@@ -5,8 +5,11 @@ import backend.exercise.iptracer.model.exceptions.EmptyResponseException;
 import backend.exercise.iptracer.model.exceptions.InvalidFieldException;
 import backend.exercise.iptracer.model.exceptions.InvalidIpFormatException;
 import backend.exercise.iptracer.model.exceptions.UnexpectedResponseStatusException;
+import backend.exercise.iptracer.service.statistics.StatisticsService;
+import backend.exercise.iptracer.service.iptracer.DistancesResponse;
 import backend.exercise.iptracer.service.iptracer.IpTracerResponse;
 import backend.exercise.iptracer.service.iptracer.IpTracerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,22 +17,24 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @ControllerAdvice
 public class IpTracerController {
-
+    @Autowired
     IpTracerService ipTracerService;
-
-    public IpTracerController(IpTracerService ipTracerService) {
-        this.ipTracerService = ipTracerService;
-    }
+    @Autowired
+    StatisticsService statisticsService;
 
     @RequestMapping(value = "/trace", method = RequestMethod.POST)
     @ResponseBody
     public IpTracerResponse trace(@RequestBody IpDataDto ipData) {
-        return ipTracerService.trace(ipData.getId());
+        IpTracerResponse response = ipTracerService.trace(ipData.getId());
+        statisticsService.updateStatistics(response);
+
+        return response;
     }
 
     @RequestMapping(value = "/stats", method = RequestMethod.GET)
-    public String stats() {
-        return "HEllo world!";
+    @ResponseBody
+    public DistancesResponse stats() {
+        return statisticsService.distances();
     }
 
     @ExceptionHandler(value = InvalidIpFormatException.class)

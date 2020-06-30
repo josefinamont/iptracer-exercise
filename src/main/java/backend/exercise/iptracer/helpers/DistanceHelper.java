@@ -1,11 +1,11 @@
-package backend.exercise.iptracer.service;
+package backend.exercise.iptracer.helpers;
 
 import org.springframework.stereotype.Component;
 
 @Component
 public class DistanceHelper {
-    private final double latBuenosAires = -34.637145;
-    private final double lonBuenosAires = -58.406460;
+    private final double latBuenosAires = Math.toRadians(-34.637145);
+    private final double lonBuenosAires = Math.toRadians(-58.406460);
 
     public double distance(double lat, double lon) {
         // The math module contains a function

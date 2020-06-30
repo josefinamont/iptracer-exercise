@@ -8,9 +8,8 @@
 
     <bean id="httpClient" class="backend.exercise.iptracer.common.HttpClient" />
     <bean id="customJsonMapper" class="backend.exercise.iptracer.common.CustomMapper" />
-    <bean id="ipTracerService" class="backend.exercise.iptracer.service.iptracer.IpTracerService" />
 
-    <bean id="distanceHelper" class="backend.exercise.iptracer.service.DistanceHelper" />
+    <bean id="distanceHelper" class="backend.exercise.iptracer.helpers.DistanceHelper" />
 
     <bean id="fixerService" class="backend.exercise.iptracer.service.fixer.FixerService" >
         <constructor-arg ref="httpClient" />
@@ -22,12 +21,14 @@
         <constructor-arg ref="customJsonMapper" />
     </bean>
 
+    <bean id="statsService" class="backend.exercise.iptracer.service.statistics.StatisticsService" >
+        <constructor-arg ref="statsRepository" />
+    </bean>
+
     <bean id="restCountriesService" class="backend.exercise.iptracer.service.restcountries.RestCountriesService" >
         <constructor-arg ref="httpClient" />
         <constructor-arg ref="customJsonMapper" />
     </bean>
 
-    <bean id="ipTracerController" class="backend.exercise.iptracer.controller.IpTracerController">
-        <constructor-arg ref="ipTracerService" />
-    </bean>
+    <bean id="ipTracerController" class="backend.exercise.iptracer.controller.IpTracerController" />
 </beans>
