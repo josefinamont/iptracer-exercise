@@ -26,4 +26,9 @@ public class IpTracerController {
     public Distances stats() {
         return statisticsService.distances();
     }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String greetings() {
+        return "Hello World!";
+    }
 }
