@@ -1,6 +1,7 @@
 package backend.exercise.iptracer.service.ip2country;
 
 import backend.exercise.iptracer.clients.Ip2CountryClient;
+import backend.exercise.iptracer.dtos.Ip2CountryResponse;
 import org.springframework.stereotype.Service;
 
 @Service

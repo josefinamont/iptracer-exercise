@@ -1,6 +1,7 @@
 package backend.exercise.iptracer.service.fixer;
 
 import backend.exercise.iptracer.clients.FixerClient;
+import backend.exercise.iptracer.dtos.FixerResponse;
 import org.springframework.stereotype.Service;
 
 @Service

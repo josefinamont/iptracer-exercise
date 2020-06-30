@@ -1,25 +1,25 @@
-package backend.exercise.iptracer.service.iptracer;
+package backend.exercise.iptracer.repository;
 
+import backend.exercise.iptracer.dtos.DistancesResponse;
+import backend.exercise.iptracer.dtos.Statistic;
 import org.springframework.stereotype.Component;
-
-import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class StatisticsRepository {
-    private ConcurrentHashMap<String, Statistic> statsPerCountry = new ConcurrentHashMap<String, Statistic>();
-    private DistancesResponse distances = new DistancesResponse();
+    private static final ConcurrentHashMap<String, Statistic> statsPerCountry = new ConcurrentHashMap<>();
+    private static final DistancesResponse distances = new DistancesResponse();
 
-    public void insertStatistic(String country, double distance) {
-        Optional<Statistic> stat = Optional.ofNullable(statsPerCountry.get(country));
-
+    public static void insertStatistic(String country, double distance) {
         if (statsPerCountry.isEmpty()) {
             distances.setNearestDistance(distance);
             distances.setFurthestDistance(distance);
             distances.setAverageDistance(distance);
             statsPerCountry.put(country, new Statistic(distance, 1));
         } else {
+            Optional<Statistic> stat = Optional.ofNullable(statsPerCountry.get(country));
+
             if (stat.isPresent()) {
                 stat.get().incrementInvocations();
                 stat.get().withDistance(distance);
@@ -38,7 +38,7 @@ public class StatisticsRepository {
         return distances;
     }
 
-    private Double averageDistance() {
+    private static Double averageDistance() {
         Double sum = statsPerCountry.values().stream()
                 .map(stat -> stat.getDistance() * stat.getInvocations())
                 .mapToDouble(Double::doubleValue)

@@ -1,4 +1,4 @@
-package backend.exercise.iptracer.service.iptracer;
+package backend.exercise.iptracer.dtos;
 
 public class DistancesResponse {
     private double nearestDistance, furthestDistance, averageDistance;

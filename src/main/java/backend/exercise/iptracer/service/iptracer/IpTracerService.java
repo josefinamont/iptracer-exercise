@@ -1,10 +1,12 @@
 package backend.exercise.iptracer.service.iptracer;
 
+import backend.exercise.iptracer.dtos.IpTracerResponse;
 import backend.exercise.iptracer.model.exceptions.InvalidIpFormatException;
 import backend.exercise.iptracer.helpers.DistanceHelper;
-import backend.exercise.iptracer.service.fixer.FixerResponse;
+import backend.exercise.iptracer.dtos.FixerResponse;
+import backend.exercise.iptracer.repository.StatisticsRepository;
 import backend.exercise.iptracer.service.fixer.FixerService;
-import backend.exercise.iptracer.service.ip2country.Ip2CountryResponse;
+import backend.exercise.iptracer.dtos.Ip2CountryResponse;
 import backend.exercise.iptracer.service.ip2country.Ip2CountryService;
 import backend.exercise.iptracer.service.restcountries.RestCountriesService;
 import backend.exercise.iptracer.service.restcountries.RestCountry;
@@ -45,7 +47,12 @@ public class IpTracerService {
     private IpTracerResponse processIp(String ip) {
         Ip2CountryResponse ip2CountryResponse = ip2CountryService.getCountry(ip);
         RestCountry restCountry = restCountriesService.getRestCountries(ip2CountryResponse.getCountryCode());
-        FixerResponse fixerResponse = fixerService.getCurrencyRate(restCountry.getCurrency());
+        FixerResponse fixerResponse = fixerService.getCurrencyRate(restCountry.getCurrency()); // TODO
+
+        StatisticsRepository.insertStatistic(
+                ip2CountryResponse.getCountryCode(),
+                distanceHelper.distance(restCountry.getLat(), restCountry.getLon()) // TODO refactor
+        );
 
         return new IpTracerResponse(
                 ip,

@@ -1,7 +1,7 @@
 package backend.exercise.iptracer.clients;
 
 import backend.exercise.iptracer.common.HttpClient;
-import backend.exercise.iptracer.service.fixer.FixerResponse;
+import backend.exercise.iptracer.dtos.FixerResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
