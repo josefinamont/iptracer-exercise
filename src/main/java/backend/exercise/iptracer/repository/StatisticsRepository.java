@@ -2,7 +2,6 @@ package backend.exercise.iptracer.repository;
 
 import backend.exercise.iptracer.dtos.Distances;
 import backend.exercise.iptracer.dtos.Statistic;
-import backend.exercise.iptracer.helpers.DistanceHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -11,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class StatisticsRepository {
-    private static final ConcurrentHashMap<String, Statistic> statsPerCountry = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, Statistic> statsPerCountry = new ConcurrentHashMap<String, Statistic>();
     private static final Distances distances = new Distances();
     private static final Logger LOGGER = LoggerFactory.getLogger(StatisticsRepository.class);
 
