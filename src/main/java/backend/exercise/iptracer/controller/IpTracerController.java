@@ -1,6 +1,6 @@
 package backend.exercise.iptracer.controller;
 
-import backend.exercise.iptracer.dtos.DistancesResponse;
+import backend.exercise.iptracer.dtos.Distances;
 import backend.exercise.iptracer.dtos.IpDataDto;
 import backend.exercise.iptracer.dtos.IpTracerResponse;
 import backend.exercise.iptracer.model.exceptions.EmptyResponseException;
@@ -30,7 +30,7 @@ public class IpTracerController {
 
     @RequestMapping(value = "/stats", method = RequestMethod.GET)
     @ResponseBody
-    public DistancesResponse stats() {
+    public Distances stats() {
         return statisticsService.distances();
     }
 

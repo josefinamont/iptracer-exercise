@@ -1,9 +1,9 @@
 package backend.exercise.iptracer.dtos;
 
-public class DistancesResponse {
-    private double nearestDistance, furthestDistance, averageDistance;
+public class Distances {
+    private double nearestDistance = 0.0, furthestDistance = 0.0, averageDistance = 0.0;
 
-    public DistancesResponse() {
+    public Distances() {
 
     }
 
@@ -29,5 +29,10 @@ public class DistancesResponse {
 
     public void setAverageDistance(double averageDistance) {
         this.averageDistance = averageDistance;
+    }
+
+    public void updateDistances(Double distance) {
+        if (distance < nearestDistance) nearestDistance = distance;
+        if (distance > furthestDistance) furthestDistance = distance;
     }
 }

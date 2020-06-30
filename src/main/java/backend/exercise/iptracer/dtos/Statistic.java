@@ -4,6 +4,10 @@ public class Statistic {
     private double distance = 0.0;
     private int invocations = 0;
 
+    public Statistic() {
+
+    }
+
     public Statistic(double distance, int invocations) {
         this.distance = distance;
         this.invocations = invocations;
