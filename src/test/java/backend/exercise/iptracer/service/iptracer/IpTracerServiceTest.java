@@ -1,10 +1,11 @@
 package backend.exercise.iptracer.service.iptracer;
 
+import backend.exercise.iptracer.dtos.IpTracerResponse;
 import backend.exercise.iptracer.model.exceptions.InvalidIpFormatException;
 import backend.exercise.iptracer.helpers.DistanceHelper;
-import backend.exercise.iptracer.service.fixer.FixerResponse;
+import backend.exercise.iptracer.dtos.FixerResponse;
 import backend.exercise.iptracer.service.fixer.FixerService;
-import backend.exercise.iptracer.service.ip2country.Ip2CountryResponse;
+import backend.exercise.iptracer.dtos.Ip2CountryResponse;
 import backend.exercise.iptracer.service.ip2country.Ip2CountryService;
 import backend.exercise.iptracer.service.restcountries.RestCountriesService;
 import backend.exercise.iptracer.service.restcountries.RestCountry;
@@ -69,7 +70,7 @@ public class IpTracerServiceTest {
 
         when(ip2CountryService.getCountry(any())).thenReturn(ip2CountryResponse);
         when(restCountriesService.getRestCountries(any())).thenReturn(restCountry);
-        when(fixerService.getCurrencyRate(any())).thenReturn(fixerResponse);
+        when(fixerService.getCurrencyRate()).thenReturn(fixerResponse);
         when(distanceHelper.distance(4.0, -1.0)).thenReturn(3000.0);
 
         IpTracerResponse response = service.trace("181.46.143.99");

@@ -1,4 +1,4 @@
-package backend.exercise.iptracer.service.ip2country;
+package backend.exercise.iptracer.dtos;
 
 public class Ip2CountryResponse {
 

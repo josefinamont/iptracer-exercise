@@ -1,4 +1,4 @@
-package backend.exercise.iptracer.service.iptracer;
+package backend.exercise.iptracer.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

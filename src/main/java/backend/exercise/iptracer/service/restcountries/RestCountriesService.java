@@ -2,8 +2,8 @@ package backend.exercise.iptracer.service.restcountries;
 
 import backend.exercise.iptracer.clients.RestCountriesClient;
 import backend.exercise.iptracer.model.exceptions.InvalidFieldException;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
@@ -19,6 +19,7 @@ public class RestCountriesService {
         this.restCountriesClient = restCountriesClient;
     }
 
+    @Async
     public RestCountry getRestCountries(String countryCode) {
         RestCountriesResponse response = restCountriesClient.getResponse(countryCode);
         double lat, lon;

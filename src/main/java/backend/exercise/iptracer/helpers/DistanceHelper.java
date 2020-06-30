@@ -1,5 +1,7 @@
 package backend.exercise.iptracer.helpers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -7,10 +9,11 @@ public class DistanceHelper {
     private final double latBuenosAires = Math.toRadians(-34.637145);
     private final double lonBuenosAires = Math.toRadians(-58.406460);
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(DistanceHelper.class);
+
     public double distance(double lat, double lon) {
-        // The math module contains a function
-        // named toRadians which converts from
-        // degrees to radians.
+        LOGGER.info("Calculating distance from Buenos Aires");
+
         lon = Math.toRadians(lon);
         lat = Math.toRadians(lat);
 

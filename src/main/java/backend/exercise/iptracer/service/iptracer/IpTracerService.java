@@ -1,10 +1,12 @@
 package backend.exercise.iptracer.service.iptracer;
 
+import backend.exercise.iptracer.dtos.IpTracerResponse;
 import backend.exercise.iptracer.model.exceptions.InvalidIpFormatException;
 import backend.exercise.iptracer.helpers.DistanceHelper;
-import backend.exercise.iptracer.service.fixer.FixerResponse;
+import backend.exercise.iptracer.dtos.FixerResponse;
+import backend.exercise.iptracer.repository.StatisticsRepository;
 import backend.exercise.iptracer.service.fixer.FixerService;
-import backend.exercise.iptracer.service.ip2country.Ip2CountryResponse;
+import backend.exercise.iptracer.dtos.Ip2CountryResponse;
 import backend.exercise.iptracer.service.ip2country.Ip2CountryService;
 import backend.exercise.iptracer.service.restcountries.RestCountriesService;
 import backend.exercise.iptracer.service.restcountries.RestCountry;
@@ -14,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Map;
 
 @Service
@@ -34,7 +35,7 @@ public class IpTracerService {
 
     public IpTracerResponse trace(String ip) {
         if (isAValidIp(ip)) {
-            LOGGER.info("The IP is valid");
+            LOGGER.info("The IP provided is valid");
             return processIp(ip);
         } else {
             LOGGER.info("The IP provided is not valid");
@@ -45,7 +46,13 @@ public class IpTracerService {
     private IpTracerResponse processIp(String ip) {
         Ip2CountryResponse ip2CountryResponse = ip2CountryService.getCountry(ip);
         RestCountry restCountry = restCountriesService.getRestCountries(ip2CountryResponse.getCountryCode());
-        FixerResponse fixerResponse = fixerService.getCurrencyRate(restCountry.getCurrency());
+        FixerResponse fixerResponse = fixerService.getCurrencyRate();
+
+        double estimatedDistance = distanceHelper.distance(restCountry.getLat(), restCountry.getLon());
+
+        StatisticsRepository.insertStatistic(
+                ip2CountryResponse.getCountryCode(),
+                estimatedDistance);
 
         return new IpTracerResponse(
                 ip,
@@ -55,7 +62,7 @@ public class IpTracerService {
                 restCountry.getLanguages(),
                 buildCurrency(restCountry.getCurrency(), fixerResponse.getRates()),
                 restCountry.getTimes(),
-                buildDistance(restCountry.getLat(), restCountry.getLon())
+                buildDistance(estimatedDistance)
         );
     }
 
@@ -68,12 +75,12 @@ public class IpTracerService {
         return LocalDateTime.now().toString(formatter);
     }
 
-    private String buildCurrency(String currency, Map<String,Double> rates) {
-        double sarasin = rates.get("USD") / rates.get(currency);
-        return currency + " (1 " + currency + " = " + sarasin + " USD)";
+    private String buildCurrency(String currency, Map<String, Double> rates) {
+        double conversionFromCurrencyToUSD = rates.getOrDefault("USD", 0.0) / rates.getOrDefault(currency, 1.0);
+        return currency + " (1 " + currency + " = " + conversionFromCurrencyToUSD + " USD)";
     }
 
-    private String buildDistance(double ipLat, double ipLong) {
-        return distanceHelper.distance(ipLat, ipLong) + " kms";
+    private String buildDistance(double estimatedDistance) {
+        return estimatedDistance + " kms";
     }
 }
