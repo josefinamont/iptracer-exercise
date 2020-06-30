@@ -1,6 +1,9 @@
 package backend.exercise.iptracer.service.restcountries;
 
 import backend.exercise.iptracer.clients.RestCountriesClient;
+import backend.exercise.iptracer.dtos.Language;
+import backend.exercise.iptracer.dtos.RestCountriesResponse;
+import backend.exercise.iptracer.dtos.RestCountry;
 import backend.exercise.iptracer.model.exceptions.InvalidFieldException;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;

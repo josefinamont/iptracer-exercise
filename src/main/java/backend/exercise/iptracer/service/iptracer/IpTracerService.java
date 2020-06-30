@@ -9,7 +9,7 @@ import backend.exercise.iptracer.service.fixer.FixerService;
 import backend.exercise.iptracer.dtos.Ip2CountryResponse;
 import backend.exercise.iptracer.service.ip2country.Ip2CountryService;
 import backend.exercise.iptracer.service.restcountries.RestCountriesService;
-import backend.exercise.iptracer.service.restcountries.RestCountry;
+import backend.exercise.iptracer.dtos.RestCountry;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.slf4j.Logger;

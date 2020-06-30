@@ -1,4 +1,4 @@
-package backend.exercise.iptracer.service.restcountries;
+package backend.exercise.iptracer.dtos;
 
 public class Currency {
     private String code;

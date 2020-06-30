@@ -8,7 +8,7 @@ import backend.exercise.iptracer.service.fixer.FixerService;
 import backend.exercise.iptracer.dtos.Ip2CountryResponse;
 import backend.exercise.iptracer.service.ip2country.Ip2CountryService;
 import backend.exercise.iptracer.service.restcountries.RestCountriesService;
-import backend.exercise.iptracer.service.restcountries.RestCountry;
+import backend.exercise.iptracer.dtos.RestCountry;
 import org.assertj.core.util.Lists;
 import org.assertj.core.util.Maps;
 import org.junit.Before;
