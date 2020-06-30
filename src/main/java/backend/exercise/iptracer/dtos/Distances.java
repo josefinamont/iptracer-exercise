@@ -35,4 +35,10 @@ public class Distances {
         if (distance < nearestDistance) nearestDistance = distance;
         if (distance > furthestDistance) furthestDistance = distance;
     }
+
+    public void initializeWith(Double distance) {
+        nearestDistance = distance;
+        furthestDistance = distance;
+        averageDistance = distance;
+    }
 }

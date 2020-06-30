@@ -77,8 +77,8 @@ public class IpTracerService {
     }
 
     private String buildCurrency(String currency, Map<String,Double> rates) {
-        double sarasin = rates.get("USD") / rates.get(currency);
-        return currency + " (1 " + currency + " = " + sarasin + " USD)";
+        double conversionFromCurrencyToUSD = rates.getOrDefault("USD", 0.0) / rates.getOrDefault(currency, 1.0);
+        return currency + " (1 " + currency + " = " + conversionFromCurrencyToUSD + " USD)";
     }
 
     private String buildDistance(double estimatedDistance) {

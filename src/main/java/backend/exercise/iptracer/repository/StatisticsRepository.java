@@ -13,10 +13,7 @@ public class StatisticsRepository {
 
     public static void insertStatistic(String country, double distance) {
         if (statsPerCountry.isEmpty()) {
-            distances.setNearestDistance(distance);
-            distances.setFurthestDistance(distance);
-            distances.setAverageDistance(distance);
-
+            distances.initializeWith(distance);
             statsPerCountry.put(country, new Statistic(distance, 1));
         } else {
             Statistic currentStat = statsPerCountry.getOrDefault(country, new Statistic());
@@ -24,7 +21,6 @@ public class StatisticsRepository {
             currentStat.withDistance(distance);
 
             statsPerCountry.put(country, currentStat);
-
             distances.updateDistances(distance);
             distances.setAverageDistance(averageDistance());
         }
