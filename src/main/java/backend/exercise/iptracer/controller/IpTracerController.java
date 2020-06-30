@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-//@ControllerAdvice
 public class IpTracerController {
     @Autowired
     IpTracerService ipTracerService;
@@ -33,14 +32,4 @@ public class IpTracerController {
     public Distances stats() {
         return statisticsService.distances();
     }
-
-    /*@ExceptionHandler(value = InvalidIpFormatException.class)
-    public ResponseEntity<Object> exception(RuntimeException exception) {
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(value = { UnexpectedResponseStatusException.class, InvalidFieldException.class, EmptyResponseException.class})
-    public ResponseEntity<Object> exception(UnexpectedResponseStatusException exception) {
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-    }*/
 }
