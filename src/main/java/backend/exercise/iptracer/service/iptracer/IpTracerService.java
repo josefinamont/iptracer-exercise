@@ -49,10 +49,11 @@ public class IpTracerService {
         RestCountry restCountry = restCountriesService.getRestCountries(ip2CountryResponse.getCountryCode());
         FixerResponse fixerResponse = fixerService.getCurrencyRate(restCountry.getCurrency()); // TODO
 
+        double estimatedDistance = distanceHelper.distance(restCountry.getLat(), restCountry.getLon());
+
         StatisticsRepository.insertStatistic(
                 ip2CountryResponse.getCountryCode(),
-                distanceHelper.distance(restCountry.getLat(), restCountry.getLon()) // TODO refactor
-        );
+                estimatedDistance);
 
         return new IpTracerResponse(
                 ip,
@@ -62,7 +63,7 @@ public class IpTracerService {
                 restCountry.getLanguages(),
                 buildCurrency(restCountry.getCurrency(), fixerResponse.getRates()),
                 restCountry.getTimes(),
-                buildDistance(restCountry.getLat(), restCountry.getLon())
+                buildDistance(estimatedDistance)
         );
     }
 
@@ -80,7 +81,7 @@ public class IpTracerService {
         return currency + " (1 " + currency + " = " + sarasin + " USD)";
     }
 
-    private String buildDistance(double ipLat, double ipLong) {
-        return distanceHelper.distance(ipLat, ipLong) + " kms";
+    private String buildDistance(double estimatedDistance) {
+        return estimatedDistance + " kms";
     }
 }
