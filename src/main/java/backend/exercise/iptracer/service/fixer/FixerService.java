@@ -43,6 +43,6 @@ public class FixerService {
             );
         } else
             LOGGER.info("Found rate in the repository for currency code: " + currencyCode);
-            return possibleRates.get();
+        return possibleRates.get();
     }
 }

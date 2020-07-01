@@ -1,22 +1,20 @@
 package backend.exercise.iptracer.service.iptracer;
 
+import backend.exercise.iptracer.dtos.Ip2CountryResponse;
 import backend.exercise.iptracer.dtos.IpTracerResponse;
-import backend.exercise.iptracer.model.exceptions.InvalidIpFormatException;
+import backend.exercise.iptracer.dtos.RestCountry;
 import backend.exercise.iptracer.helpers.DistanceHelper;
-import backend.exercise.iptracer.dtos.FixerResponse;
+import backend.exercise.iptracer.model.exceptions.InvalidIpFormatException;
 import backend.exercise.iptracer.repository.StatisticsRepository;
 import backend.exercise.iptracer.service.fixer.FixerService;
-import backend.exercise.iptracer.dtos.Ip2CountryResponse;
 import backend.exercise.iptracer.service.ip2country.Ip2CountryService;
 import backend.exercise.iptracer.service.restcountries.RestCountriesService;
-import backend.exercise.iptracer.dtos.RestCountry;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Map;
 
 @Service
 public class IpTracerService {
@@ -49,7 +47,6 @@ public class IpTracerService {
         RestCountry restCountry = restCountriesService.getRestCountries(ip2CountryResponse.getCountryCode());
         Double currencyRate = fixerService.getCurrencyRate(restCountry.getCurrency());
         Double usdRate = fixerService.getCurrencyRate(USD_CURRENCY_CODE);
-
         double estimatedDistance = distanceHelper.distance(restCountry.getLat(), restCountry.getLon());
 
         StatisticsRepository.insertStatistic(
