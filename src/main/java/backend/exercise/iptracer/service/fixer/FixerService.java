@@ -12,14 +12,12 @@ import java.util.Optional;
 
 @Service
 public class FixerService {
-    private final FixerClient fixerClient;
+    @Autowired
+    private FixerClient fixerClient;
     @Autowired
     private FixerRepository fixerRepository;
-    private static final Logger LOGGER = LoggerFactory.getLogger(FixerService.class);
 
-    public FixerService(FixerClient fixerClient) {
-        this.fixerClient = fixerClient;
-    }
+    private static final Logger LOGGER = LoggerFactory.getLogger(FixerService.class);
 
     public Double getCurrencyRate(String currencyCode) {
         Optional<Double> possibleRates = fixerRepository.getRateForCurrency(currencyCode);

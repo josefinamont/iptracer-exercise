@@ -20,15 +20,13 @@ import static org.joda.time.DateTimeZone.UTC;
 
 @Service
 public class RestCountriesService {
-    private final RestCountriesClient restCountriesClient;
+    @Autowired
+    private RestCountriesClient restCountriesClient;
     @Autowired
     private RestCountriesRepository restCountriesRepository;
+
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     private static final Logger LOGGER = LoggerFactory.getLogger(RestCountriesService.class);
-
-    public RestCountriesService(RestCountriesClient restCountriesClient) {
-        this.restCountriesClient = restCountriesClient;
-    }
 
     public RestCountry getRestCountries(String countryCode) {
         Optional<RestCountry> possibleCountryInfo = restCountriesRepository.getCountryInfo(countryCode);

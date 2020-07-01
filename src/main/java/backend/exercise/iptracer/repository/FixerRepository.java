@@ -16,4 +16,8 @@ public class FixerRepository {
     public void withRates(Map<String, Double> rates) {
         this.rates = rates;
     }
+
+    public boolean isEmpty() {
+        return rates.isEmpty();
+    }
 }
