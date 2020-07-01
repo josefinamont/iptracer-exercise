@@ -18,7 +18,7 @@ public class IpTracerController {
     @RequestMapping(value = "/trace", method = RequestMethod.POST)
     @ResponseBody
     public IpTracerResponse trace(@RequestBody IpDataDto ipData) {
-        return ipTracerService.trace(ipData.getId());
+        return ipTracerService.trace(ipData.getIp());
     }
 
     @RequestMapping(value = "/stats", method = RequestMethod.GET)
@@ -28,6 +28,7 @@ public class IpTracerController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
+    @ResponseBody
     public String greetings() {
         return "Hello World!";
     }

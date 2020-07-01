@@ -1,9 +1,11 @@
 package backend.exercise.iptracer.service.iptracer;
 
 import backend.exercise.iptracer.dtos.IpTracerResponse;
+import backend.exercise.iptracer.model.exceptions.EmptyResponseException;
 import backend.exercise.iptracer.model.exceptions.InvalidIpFormatException;
 import backend.exercise.iptracer.helpers.DistanceHelper;
 import backend.exercise.iptracer.dtos.FixerResponse;
+import backend.exercise.iptracer.model.exceptions.UnexpectedResponseStatusException;
 import backend.exercise.iptracer.service.fixer.FixerService;
 import backend.exercise.iptracer.dtos.Ip2CountryResponse;
 import backend.exercise.iptracer.service.ip2country.Ip2CountryService;
@@ -80,5 +82,33 @@ public class IpTracerServiceTest {
         assertEquals("AR", response.getIsoCode());
         assertTrue(response.getCurrency().contains("ARS"));
         assertTrue(response.getLanguages().contains("Español(es)"));
+    }
+
+    @Test(expected = EmptyResponseException.class)
+    public void testInvalidServiceResponse() {
+        when(ip2CountryService.getCountry(any())).thenThrow(new EmptyResponseException("The response body is empty"));
+
+        service.trace("181.46.143.99");
+    }
+
+    @Test(expected = UnexpectedResponseStatusException.class)
+    public void testUnexpectedResponseStatus() {
+        Ip2CountryResponse ip2CountryResponse = new Ip2CountryResponse();
+        ip2CountryResponse.setCountryCode("AR");
+        ip2CountryResponse.setCountryName("Argentina");
+
+        RestCountry restCountry = new RestCountry(
+                Lists.newArrayList("Español(es)"),
+                "ARS",
+                Lists.newArrayList("14:21:35 (UTC-03:00)"),
+                -234,
+                2345
+        );
+
+        when(ip2CountryService.getCountry(any())).thenReturn(ip2CountryResponse);
+        when(restCountriesService.getRestCountries(any())).thenReturn(restCountry);
+        when(fixerService.getCurrencyRate()).thenThrow(new UnexpectedResponseStatusException("The response body is empty"));
+
+        service.trace("181.46.143.99");
     }
 }

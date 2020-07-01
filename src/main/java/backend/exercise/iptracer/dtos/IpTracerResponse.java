@@ -22,6 +22,10 @@ public class IpTracerResponse {
     @JsonProperty("estimated_distance")
     private String estimatedDistance;
 
+    public IpTracerResponse() {
+
+    }
+
     public IpTracerResponse(String ip, String datetime, String country, String isoCode, List<String> languages,
                             String currency, List<String> times, String estimatedDistance) {
         this.ip = ip;
