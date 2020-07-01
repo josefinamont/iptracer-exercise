@@ -49,4 +49,8 @@ public class StatisticsRepository {
     public Distances distances() {
         return distances;
     }
+
+    public Statistic getStatisticBy(String country) {
+        return statsPerCountry.getOrDefault(country, new Statistic());
+    }
 }

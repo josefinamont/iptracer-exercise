@@ -1,7 +1,7 @@
 package backend.exercise.iptracer.dtos;
 
 public class Statistic {
-    private double distance = 0.0;
+    private double distance = 0;
     private int invocations = 0;
 
     public Statistic() {
