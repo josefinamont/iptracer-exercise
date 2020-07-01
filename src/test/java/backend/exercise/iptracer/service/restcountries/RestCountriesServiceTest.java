@@ -1,15 +1,10 @@
 package backend.exercise.iptracer.service.restcountries;
 
-import backend.exercise.iptracer.clients.FixerClient;
 import backend.exercise.iptracer.clients.RestCountriesClient;
-import backend.exercise.iptracer.dtos.FixerResponse;
 import backend.exercise.iptracer.dtos.RestCountriesResponse;
 import backend.exercise.iptracer.dtos.RestCountry;
-import backend.exercise.iptracer.repository.FixerRepository;
 import backend.exercise.iptracer.repository.RestCountriesRepository;
-import backend.exercise.iptracer.service.fixer.FixerService;
 import org.assertj.core.util.Lists;
-import org.assertj.core.util.Maps;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -19,7 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
