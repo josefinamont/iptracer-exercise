@@ -1,6 +1,6 @@
 package backend.exercise.iptracer.service.statistics;
 
-import backend.exercise.iptracer.dtos.Distances;
+import backend.exercise.iptracer.model.Distances;
 import backend.exercise.iptracer.repository.StatisticsRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

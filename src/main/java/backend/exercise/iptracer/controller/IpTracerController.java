@@ -1,6 +1,6 @@
 package backend.exercise.iptracer.controller;
 
-import backend.exercise.iptracer.dtos.Distances;
+import backend.exercise.iptracer.model.Distances;
 import backend.exercise.iptracer.dtos.IpDataDto;
 import backend.exercise.iptracer.dtos.IpTracerResponse;
 import backend.exercise.iptracer.service.iptracer.IpTracerService;
