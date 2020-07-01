@@ -6,6 +6,10 @@ public class IpDataDto {
     @JsonProperty("ip")
     private String ip;
 
+    public IpDataDto() {
+
+    }
+
     public IpDataDto(String ip) {
         this.ip = ip;
     }

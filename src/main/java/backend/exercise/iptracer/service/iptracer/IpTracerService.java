@@ -28,6 +28,7 @@ public class IpTracerService {
     private FixerService fixerService;
     @Autowired
     private DistanceHelper distanceHelper;
+    private final String USD_CURRENCY_CODE = "USD";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(IpTracerService.class);
 
@@ -46,7 +47,8 @@ public class IpTracerService {
     private IpTracerResponse processIp(String ip) {
         Ip2CountryResponse ip2CountryResponse = ip2CountryService.getCountry(ip);
         RestCountry restCountry = restCountriesService.getRestCountries(ip2CountryResponse.getCountryCode());
-        FixerResponse fixerResponse = fixerService.getCurrencyRate();
+        Double currencyRate = fixerService.getCurrencyRate(restCountry.getCurrency());
+        Double usdRate = fixerService.getCurrencyRate(USD_CURRENCY_CODE);
 
         double estimatedDistance = distanceHelper.distance(restCountry.getLat(), restCountry.getLon());
 
@@ -60,7 +62,7 @@ public class IpTracerService {
                 ip2CountryResponse.getCountryName(),
                 ip2CountryResponse.getCountryCode(),
                 restCountry.getLanguages(),
-                buildCurrency(restCountry.getCurrency(), fixerResponse.getRates()),
+                buildCurrency(restCountry.getCurrency(), currencyRate, usdRate),
                 restCountry.getTimes(),
                 buildDistance(estimatedDistance)
         );
@@ -75,8 +77,8 @@ public class IpTracerService {
         return LocalDateTime.now().toString(formatter);
     }
 
-    private String buildCurrency(String currency, Map<String, Double> rates) {
-        double conversionFromCurrencyToUSD = rates.getOrDefault("USD", 0.0) / rates.getOrDefault(currency, 1.0);
+    private String buildCurrency(String currency, Double currencyRate, Double usdRate) {
+        double conversionFromCurrencyToUSD = usdRate / currencyRate;
         return currency + " (1 " + currency + " = " + conversionFromCurrencyToUSD + " USD)";
     }
 

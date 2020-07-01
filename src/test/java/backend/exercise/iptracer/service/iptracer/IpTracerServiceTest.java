@@ -65,14 +65,10 @@ public class IpTracerServiceTest {
                 2345
         );
 
-        Map<String, Double> rates = Maps.newHashMap("USD", 1.123077);
-        rates.put("ARS", 79.061729);
-
-        FixerResponse fixerResponse = new FixerResponse(rates);
-
         when(ip2CountryService.getCountry(any())).thenReturn(ip2CountryResponse);
         when(restCountriesService.getRestCountries(any())).thenReturn(restCountry);
-        when(fixerService.getCurrencyRate()).thenReturn(fixerResponse);
+        when(fixerService.getCurrencyRate("USD")).thenReturn(1.123077);
+        when(fixerService.getCurrencyRate("ARS")).thenReturn(79.061729);
         when(distanceHelper.distance(4.0, -1.0)).thenReturn(3000.0);
 
         IpTracerResponse response = service.trace("181.46.143.99");
@@ -107,7 +103,7 @@ public class IpTracerServiceTest {
 
         when(ip2CountryService.getCountry(any())).thenReturn(ip2CountryResponse);
         when(restCountriesService.getRestCountries(any())).thenReturn(restCountry);
-        when(fixerService.getCurrencyRate()).thenThrow(new UnexpectedResponseStatusException("The response body is empty"));
+        when(fixerService.getCurrencyRate(any())).thenThrow(new UnexpectedResponseStatusException("The response body is empty"));
 
         service.trace("181.46.143.99");
     }
