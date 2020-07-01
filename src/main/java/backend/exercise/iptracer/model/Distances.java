@@ -1,7 +1,14 @@
 package backend.exercise.iptracer.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Distances {
-    private double nearestDistance = 0.0, furthestDistance = 0.0, averageDistance = 0.0;
+    @JsonProperty("nearest_distance")
+    private double nearestDistance = 0.0;
+    @JsonProperty("furthest_distance")
+    private double furthestDistance = 0.0;
+    @JsonProperty("average_distance")
+    private double averageDistance = 0.0;
 
     public Distances() {
 
