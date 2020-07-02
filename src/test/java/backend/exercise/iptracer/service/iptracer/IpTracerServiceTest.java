@@ -38,8 +38,6 @@ public class IpTracerServiceTest {
     private RestCountriesService restCountriesService;
     @Mock
     private FixerService fixerService;
-    @Mock
-    private DistanceHelper distanceHelper;
 
     @Before
     public void init() {
@@ -69,7 +67,6 @@ public class IpTracerServiceTest {
         when(restCountriesService.getRestCountries(any())).thenReturn(restCountry);
         when(fixerService.getCurrencyRate("USD")).thenReturn(1.123077);
         when(fixerService.getCurrencyRate("ARS")).thenReturn(79.061729);
-        when(distanceHelper.distance(4.0, -1.0)).thenReturn(3000.0);
 
         IpTracerResponse response = service.trace("181.46.143.99");
 

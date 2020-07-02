@@ -25,8 +25,7 @@ public class IpTracerService {
     private RestCountriesService restCountriesService;
     @Autowired
     private FixerService fixerService;
-    @Autowired
-    private DistanceHelper distanceHelper;
+
     private final String USD_CURRENCY_CODE = "USD";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(IpTracerService.class);
@@ -48,7 +47,7 @@ public class IpTracerService {
         RestCountry restCountry = restCountriesService.getRestCountries(ip2CountryResponse.getCountryCode());
         Double currencyRate = fixerService.getCurrencyRate(restCountry.getCurrency());
         Double usdRate = fixerService.getCurrencyRate(USD_CURRENCY_CODE);
-        double estimatedDistance = distanceHelper.distance(restCountry.getLat(), restCountry.getLon());
+        double estimatedDistance = DistanceHelper.distance(restCountry.getLat(), restCountry.getLon());
 
         StatisticsRepository.insertStatistic(
                 ip2CountryResponse.getCountryCode(),
