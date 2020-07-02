@@ -11,6 +11,7 @@ import backend.exercise.iptracer.service.ip2country.Ip2CountryService;
 import backend.exercise.iptracer.service.restcountries.RestCountriesService;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +71,7 @@ public class IpTracerService {
     }
 
     private String buildDateTime() {
-        org.joda.time.format.DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
         return LocalDateTime.now().toString(formatter);
     }
 
