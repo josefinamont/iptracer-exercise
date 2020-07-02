@@ -23,8 +23,6 @@ public class RestCountriesRepositoryTest {
                 -36
         );
 
-        assertTrue(repository.isEmpty());
-
         repository.withCountryInfo("ES", restCountry);
 
         assertEquals(Optional.of(restCountry), repository.getCountryInfo("ES"));

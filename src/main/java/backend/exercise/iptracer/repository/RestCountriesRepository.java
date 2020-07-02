@@ -17,8 +17,4 @@ public class RestCountriesRepository {
     public void withCountryInfo(String countryCode, RestCountry countryInfo) {
         this.countryInfos.put(countryCode, countryInfo);
     }
-
-    public boolean isEmpty() {
-        return countryInfos.isEmpty();
-    }
 }
